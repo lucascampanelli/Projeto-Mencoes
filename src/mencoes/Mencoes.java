@@ -15,6 +15,8 @@ public class Mencoes {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        bdcon conn = new bdcon();
+        conn.conn();
        index index = new index();
        index.setVisible(true);
     }

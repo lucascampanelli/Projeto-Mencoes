@@ -191,7 +191,8 @@ public class cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        bdcon conn = new bdcon();
+        conn.insert(nomefield.getText(), turmafield.getText(), mencao1.getText(), mencao2.getText(), mencao3.getText(), mencao4.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
