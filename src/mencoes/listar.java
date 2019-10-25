@@ -5,6 +5,8 @@
  */
 package mencoes;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author Familia Souza
@@ -14,8 +16,40 @@ public class listar extends javax.swing.JFrame {
     /**
      * Creates new form listar
      */
-    public listar() {
+    public listar(){
         initComponents();
+        bdcon con = new bdcon();
+        
+        con.GetNome();
+        con.GetTurma();
+        con.GetMencao1();
+        con.GetMencao2();
+        con.GetMencao3();
+        con.GetMencao4();
+        con.GetMedia();
+        
+        String media = con.getMedia();
+        
+        if(Float.parseFloat(media) > 8){
+            media = "MB";
+        }
+        else if(Float.parseFloat(media) > 6 && Float.parseFloat(media) < 9){
+            media = "B";
+        }
+        else if(Float.parseFloat(media) > 5 && Float.parseFloat(media) < 8){
+            media = "R";
+        }
+        else if(Float.parseFloat(media) < 5){
+            media = "I";
+        }
+        
+        lblaluno.setText(con.getNome());
+        lblturma.setText(con.getTurma());
+        mencao1.setText(con.getMencao1());
+        mencao2.setText(con.getMencao2());
+        mencao3.setText(con.getMencao3());
+        mencao4.setText(con.getMencao4());
+        lblmedia.setText(media);
     }
 
     /**
@@ -35,14 +69,13 @@ public class listar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        mencao1 = new javax.swing.JLabel();
+        mencao2 = new javax.swing.JLabel();
+        mencao3 = new javax.swing.JLabel();
+        mencao4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        lblmedia = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,17 +92,17 @@ public class listar extends javax.swing.JFrame {
 
         jLabel4.setText("Menção 4");
 
-        jLabel5.setText("R");
+        mencao1.setText("R");
 
-        jLabel6.setText("R");
+        mencao2.setText("R");
 
-        jLabel7.setText("R");
+        mencao3.setText("R");
 
-        jLabel8.setText("R");
+        mencao4.setText("R");
 
         jLabel9.setText("Média");
 
-        jLabel10.setText("R");
+        lblmedia.setText("R");
 
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -78,16 +111,14 @@ public class listar extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Próximo");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -99,26 +130,23 @@ public class listar extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel9))
-                            .addComponent(jSeparator2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jSeparator2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
+                        .addGap(80, 80, 80)
+                        .addComponent(mencao1)
+                        .addGap(55, 55, 55)
+                        .addComponent(mencao2)
                         .addGap(60, 60, 60)
-                        .addComponent(jLabel7)
-                        .addGap(53, 53, 53)
-                        .addComponent(jLabel8)
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel10)
-                        .addGap(74, 74, 74))))
+                        .addComponent(mencao3)
+                        .addGap(57, 57, 57)
+                        .addComponent(mencao4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblmedia)))
+                .addContainerGap(63, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
@@ -150,15 +178,13 @@ public class listar extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel10))
+                    .addComponent(mencao1)
+                    .addComponent(mencao2)
+                    .addComponent(mencao3)
+                    .addComponent(mencao4)
+                    .addComponent(lblmedia))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
@@ -207,20 +233,19 @@ public class listar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblaluno;
+    private javax.swing.JLabel lblmedia;
     private javax.swing.JLabel lblturma;
+    private javax.swing.JLabel mencao1;
+    private javax.swing.JLabel mencao2;
+    private javax.swing.JLabel mencao3;
+    private javax.swing.JLabel mencao4;
     // End of variables declaration//GEN-END:variables
 }
